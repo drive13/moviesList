@@ -16,15 +16,19 @@ class HomeController extends Controller
     public function index()
     {
 
-        $apiURL = 'https://api.onlinewebtutorblog.com/employees';
+        $apiURL = 'http://api.themoviedb.org/3/trending/all/week?api_key=9802259b33ec67537d82ea6557259e6a';
 
         $client = new \GuzzleHttp\Client();
         $response = $client->request('GET', $apiURL);
 
-        // $statusCode = $response->getStatusCode();
-        // $responseBody = json_decode($response->getBody(), true);
+        $statusCode = $response->getStatusCode();
+        $responseBody = json_decode($response->getBody(), true);
 
-        dd($response);
+        // dd($responseBody['results']);
+
+        return view('home', [
+            'data' => $responseBody['results'],
+        ]);
     }
 
     /**
@@ -56,7 +60,19 @@ class HomeController extends Controller
      */
     public function show($id)
     {
-        //
+        $apiURL = 'http://api.themoviedb.org/3/movie/' . $id  . '?api_key=9802259b33ec67537d82ea6557259e6a';
+
+        $client = new \GuzzleHttp\Client();
+        $response = $client->request('GET', $apiURL);
+
+        $statusCode = $response->getStatusCode();
+        $responseBody = json_decode($response->getBody(), true);
+
+        // dd($responseBody);
+
+        return view('movie_details', [
+            'data' => $responseBody,
+        ]);
     }
 
     /**

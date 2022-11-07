@@ -19,3 +19,4 @@ Route::get('/kategori', function () {
 });
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/movies/{id}', [HomeController::class, 'show']);

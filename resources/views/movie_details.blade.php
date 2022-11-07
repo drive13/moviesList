@@ -32,39 +32,6 @@
         
         </head>
     <body>
-    
-{{-- <header> --}}
-    {{-- <div class="collapse bg-dark" id="navbarHeader">
-        <div class="container">
-        <div class="row">
-            <div class="col-sm-8 col-md-7 py-4">
-                <h4 class="text-white">About</h4>
-                <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
-            </div>
-            <div class="col-sm-4 offset-md-1 py-4">
-                <h4 class="text-white">Contact</h4>
-                <ul class="list-unstyled">
-                    <li><a href="#" class="text-white">Follow on Twitter</a></li>
-                    <li><a href="#" class="text-white">Like on Facebook</a></li>
-                    <li><a href="#" class="text-white">Email me</a></li>
-                </ul>
-            </div>
-        </div>
-        </div>
-    </div> --}}
-
-    {{-- <div class="navbar navbar-dark bg-dark shadow-sm">
-        <div class="container">
-        <a href="#" class="navbar-brand d-flex align-items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-            <strong>Album</strong>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        </div>
-    </div> --}}
-{{-- </header> --}}
 
     <header>
         {{-- Navbar --}}
@@ -105,49 +72,47 @@
     </header>
 
     <main>
-        <section class="py-5 text-center container">
+        {{-- <section class="py-5 text-center container">
             <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h1 class="fw-light">Welcome to Movie List</h1>
                 <p class="lead text-muted">Search for movie you want to watch here. We give you the recommendation and the details about movie that fits your taste! <3</p>
                 <p>
-                {{-- <a href="#" class="btn btn-primary my-2">Main call to action</a>
-                <a href="#" class="btn btn-secondary my-2">Secondary action</a> --}}
                 </p>
             </div>
             </div>
-        </section>
+        </section> --}}
 
         <div class="album py-5 bg-light">
             <div class="container">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    @foreach ($data as $film)
-                            <div class="col">
-                                <div class="card shadow-sm">
-                                    <img class="bd-placeholder-img card-img-top" width="100%" height="100%" src="https://image.tmdb.org/t/p/w500/{{ $film['poster_path'] }}" alt="">
-                                    <div class="card-body">
-                                        
-                                        <h5 class="card-title">{{ array_key_exists('original_title', $film) ? $film['original_title'] : 'Unknown'; }}</h5>
-                                        <p class="card-text">
-                                            Synopsis : {{ $film['overview'] }}
-                                        </p>
-                                        
-                                        {{-- <p class="card-text">
-                                            Genre : {{ $ }}
-                                        </p> --}}
-                                        <div class="d-flex justify-content-between mb-3">
-                                            <small class="text-muted">People Watching : {{ $film['popularity'] }}</small>
-                                            <small class="text-muted">Score : {{ $film['vote_average'] }}</small>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                            <a href="/movies/{{ $film['id'] }}" class="btn btn-sm btn-info">Lihat</a>
-                                            </div>
-                                        </div>
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img class="bd-placeholder-img card-img-top" width="100%" height="100%" src="https://image.tmdb.org/t/p/w500/{{ $data['poster_path'] }}" alt="">
+                            <div class="card-body">
+                                
+                                <h5 class="card-title">{{ array_key_exists('original_title', $data) ? $data['original_title'] : 'Unknown'; }}</h5>
+                                <p class="card-text">
+                                    Synopsis : {{ $data['overview'] }}
+                                </p>
+                                <p class="card-text">
+                                    {{-- Genre : {{ $data['genres'] }} --}}
+                                    {{-- @foreach ($data['genres'] as $genre)
+                                        <a href="#"><small>{{ $genre }}</small></a>
+                                    @endforeach --}}
+                                </p>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <small class="text-muted">People Watching : {{ $data['popularity'] }}</small>
+                                    <small class="text-muted">Score : {{ $data['vote_average'] }}</small>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                    {{-- <a href="/movies/{{ $data['id'] }}" class="btn btn-sm btn-info">Lihat</a> --}}
                                     </div>
                                 </div>
                             </div>
-                    @endforeach
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
