@@ -8,12 +8,12 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" aria-current="page" href="/">Home</a>
                     </li>
                     @if(Request::is('master-kategori*'))
                     @else
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link {{ Request::is('kategori*') ? 'active' : '' }} dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Kategori
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -23,6 +23,11 @@
                         </ul>
                     </li>
                     @endif
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item me-auto">
+                        <a class="nav-link {{ Request::is('master-kategori*') ? 'active' : '' }}" aria-current="page" href="/master-kategori">Master Kategori</a>
+                    </li>
                 </ul>
             </div>
         </div>

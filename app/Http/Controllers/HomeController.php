@@ -25,7 +25,6 @@ class HomeController extends Controller
         $statusCode = $response->getStatusCode();
         $responseBody = json_decode($response->getBody(), true);
 
-        // dd($responseBody['results']);
 
         return view('home', [
             'data' => $responseBody['results'],
@@ -65,7 +64,7 @@ class HomeController extends Controller
         $apiURL = 'http://api.themoviedb.org/3/movie/' . $id  . '?api_key=9802259b33ec67537d82ea6557259e6a';
 
         $client = new \GuzzleHttp\Client();
-        $response = $client->request('GET', $apiURL);
+        $response = $client->request('GET', $apiURL)->paginate(5);
 
         $statusCode = $response->getStatusCode();
         $responseBody = json_decode($response->getBody(), true);
