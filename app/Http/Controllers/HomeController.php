@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MasterKategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -28,6 +29,7 @@ class HomeController extends Controller
 
         return view('home', [
             'data' => $responseBody['results'],
+            'kategori' => MasterKategori::all(),
         ]);
     }
 
@@ -107,5 +109,26 @@ class HomeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Movie Kategori
+     */
+    public function kategori($param)
+    {
+        $apiURL = 'http://api.themoviedb.org/3/movie/' . $param  . '?api_key=9802259b33ec67537d82ea6557259e6a';
+
+        $client = new \GuzzleHttp\Client();
+        $response = $client->request('GET', $apiURL);
+
+        $statusCode = $response->getStatusCode();
+        $responseBody = json_decode($response->getBody(), true);
+
+        // dd($responseBody['results']);
+
+        return view('home', [
+            'data' => $responseBody['results'],
+            'kategori' => MasterKategori::all(),
+        ]);
     }
 }

@@ -28,9 +28,7 @@
                 }
             }
         </style>
-
-        
-        </head>
+    </head>
     <body>
     {{-- Navbar --}}
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -50,63 +48,39 @@
       </nav>
     {{-- Navbar End --}}
     <main>
-        <div class="album py-5 bg-light">
-            <div class="container">
-                <div class="row">
-                  <div class="col">
-                      <h1>Daftar Kategori</h1>
-                      <a href="/master-kategori/create" class="btn btn-sm btn-success mb-2">Tambah Kategori</a>
-                        {{-- Pesan --}}
-                        @if ($errors->any())
-                              <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                                  <h4>Error!!</h4>
-                                  <ul>
-                                      @foreach ($errors->all() as $error)
-                                          <li>{{ $error }}</li>
-                                      @endforeach
-                                  </ul>
-                                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                  </button>
-                              </div>
-                          @endif
-                          @if ($message = Session::get('success'))
-                              <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                  <strong>{!! $message !!}</strong>
-                                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                  </button>
-                              </div>
-                          @endif
-                          {{-- Pesan End --}}
-                    </div>
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th scope="col">No</th>
-                          <th scope="col">Kategori</th>
-                          <th scope="col">Parameter API</th>
-                          <th scope="col">Aksi</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @foreach ($data as $index => $kategori)
-                          <tr>
-                            <th scope="row">{{ $index+1 }}</th>
-                            <td>{{ $kategori->kategori }}</td>
-                            <td>{{ $kategori->param }}</td>
-                            <td>
-                              <a href="/master-kategori/{{ $kategori->id }}/edit" class="btn btn-sm btn-info">Edit</a>
-                              <a href="/master-kategori/{{ $kategori->id }}/destroy" class="btn btn-danger btn-info">Hapus</a>
-                            </td>
-                          </tr>
-                        @endforeach
-                      </tbody>
-                    </table>
-                </div>
-            </div>
+      <div class="container">
+        <div class="row my-4">
+          <div>
+            <h5>Tambah Kategori</h5>
+          </div>
+          <div class="col">
+            <form action="/master-kategori/store" method="POST">
+              @csrf
+              @method('POST')
+              <div class="mb-3">
+                <label for="kategori" class="form-label">Kategori Movie</label>
+                <input type="text" class="form-control @error('kategori') is-invalid @enderror" id="kategori" name="kategori" placeholder="Kategori movie" value="{{ old('kategori') }}">
+                @error('kategori')
+                    <div class="alert alert-danger mt-2">{{ $message }}</div>
+                @enderror
+              </div>
+              <div class="mb-3">
+                <label for="param" class="form-label">Parameter API</label>
+                <input type="text" class="form-control @error('param') is-invalid @enderror" id="param" name="param" placeholder="param api" value="{{ old('param') }}">
+                @error('param')
+                    <div class="alert alert-danger mt-2">{{ $message }}</div>
+                @enderror
+              </div>
+              <div>
+                <button class="btn btn-success" type="submit">Simpan</button>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </main>
 
-    <footer class="text-muted py-2">
+    <footer class="text-muted py-2 fixed-bottom">
       <div class="container">
           <p class="float-end mb-1">
               <a href="#">Back to top</a>
