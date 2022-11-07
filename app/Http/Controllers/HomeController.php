@@ -74,6 +74,7 @@ class HomeController extends Controller
 
         return view('movie_details', [
             'data' => $responseBody,
+            'kategori' => MasterKategori::all(),
         ]);
     }
 
